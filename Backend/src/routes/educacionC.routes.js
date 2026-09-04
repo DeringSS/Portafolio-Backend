@@ -1,8 +1,15 @@
 import {Router} from 'express';
-import { getEducacionC } from '../controllers/educacionC.controllers.js';
+import { requireAuth } from '../middleware/auth.middleware.js';
+import { 
+    getEducacionController, createEducacionController, 
+    updateEducacionController, deleteEducacionController 
+} from '../controllers/educacionC.controllers.js';
 
 const router = Router();
 
-router.get('/', getEducacionC);
+router.get('/', getEducacionController);
+router.post('/', requireAuth, createEducacionController);
+router.put('/:id', requireAuth, updateEducacionController);
+router.delete('/:id', requireAuth, deleteEducacionController);
 
 export default router;
